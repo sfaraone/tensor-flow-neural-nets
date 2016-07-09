@@ -31,7 +31,7 @@ CONFIG - contains the hyper parameter setup
 - num_layers - NUmber of  layers in the network 
 - log_folder - Folder into which the logs need to be written
 - reg - refularization strength
-- test_log_folder   ----
-                        |--->  This is for storing logs  that needs to be separated into
-                        |--->  test and train. For eg. Training versus validation accuracies
-- train_log_folder  ----
+- test_log_folder 
+                          This is for storing logs  that needs to be separated into
+                          test and train. For eg. Training versus validation accuracies
+- train_log_folder  
