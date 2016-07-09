@@ -1,7 +1,9 @@
 Fully Connected Neural Nets using Tensorflow 
-
+------------------------------------------------------------------------------------------------
 Files 
+------------------------------------------------------------------------------------------------
 ClassifyBaseModel.py - Used as a base class for different kind of neural networks 
+
 FullyConnectedNet.py - Fully Connected n layer neural network can be constructed using this 
 
 ------------------------------------------------------------------------------------------------
