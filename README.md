@@ -30,7 +30,7 @@ CONFIG - contains the hyper parameter setup
 - num_hidden_units - NUmber of hidden units in the hidden layers 
 - num_layers - NUmber of  layers in the network 
 - log_folder - Folder into which the logs need to be written
-- reg - refularization strength
+- reg - regularization strength
 - test_log_folder 
 - train_log_folder
   These are for storing logs  that needs to be separated into
