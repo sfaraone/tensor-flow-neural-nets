@@ -8,9 +8,17 @@ FullyConnectedNet.py - Fully Connected n layer neural network can be constructed
 INITIALISATION 
 ------------------------------------------------------------------------------------------------
 train_features of shape (N,[a,b,c])
+
+
 train_labels os shape (N,)
+
+
 validation_features - same shape as train features 
+
+
 validation_labels - same shape as train labels 
+
+
 CONFIG - contains the hyper parameter setup 
 
 - batch_size
