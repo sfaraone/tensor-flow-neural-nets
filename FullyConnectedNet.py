@@ -148,8 +148,8 @@ class FullyConnectedNet(ClassifyBaseModel):
             with tf.variable_scope("layer_%s"%i, reuse=True) as scope:
                 weights = tf.get_variable("W")
                 biases = tf.get_variable("b")
-                out = tf.nn.relu(tf.matmul(out, weights) + biases)
-
+###  ADDED DROPOUT TO THE FOLLOWING LINE 
+                out = tf.nn.dropout(tf.nn.relu(tf.matmul(out, weights) + biases), keep_prob)
         with tf.variable_scope("layer_%s"%(self.num_layers), reuse=True) as scope:
             weights = tf.get_variable("W")
             biases = tf.get_variable("b")
