@@ -20,6 +20,7 @@ class FullyConnectedNet(ClassifyBaseModel):
                     batch_size
                     learning_rate
                     learn_type
+                    optimiser is one of: ["vanilla", "adam", "adagrad", "rmsprop"]
                     log_folder - Folder into which the logs need to be written
                     num_epochs
                     num_hidden_units - The number of neurons in hidden layers
@@ -42,6 +43,8 @@ class FullyConnectedNet(ClassifyBaseModel):
         self.test_log_folder = config["test_log_folder"]
         self.num_epochs = config["num_epochs"]
         self.batch_size = config["batch_size"]
+        self.optimiser = config["optimiser"]
+        self.keep_prob = config["keep_prob"]
         # Form the graph for execution
         # 1. Add the placeholders that represent the end points of the graph
         # 2. Initialise the parameters of the model
@@ -100,7 +103,7 @@ class FullyConnectedNet(ClassifyBaseModel):
             loss_summary = tf.scalar_summary("loss_summary", loss)
             return loss, loss_summary
 
-    def add_optimiser(self, type="vanilla"):
+    def add_optimiser(self, optimiser="vanilla"):
         """
 
         Add the optimizer function to perform Gradient Descent
@@ -142,13 +145,13 @@ class FullyConnectedNet(ClassifyBaseModel):
         calculate the activations and final scores before the softmax loss is
         added
         """
-        out = self.X
+        input = self.X
 
         for i in xrange(1, self.num_layers):
             with tf.variable_scope("layer_%s"%i, reuse=True) as scope:
                 weights = tf.get_variable("W")
                 biases = tf.get_variable("b")
-                out = tf.nn.relu(tf.matmul(out, weights) + biases)
+                out = tf.nn.relu(tf.matmul(input, weights) + biases)
 
         with tf.variable_scope("layer_%s"%(self.num_layers), reuse=True) as scope:
             weights = tf.get_variable("W")
