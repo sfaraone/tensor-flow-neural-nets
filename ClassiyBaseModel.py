@@ -108,6 +108,24 @@ class ClassifyBaseModel(object):
         assert np.isnan(np.sum(train_labels)) == False
         return train_data, train_labels
 
+    def read_csv(self, batch_size, filename, record_defaults):
+        filename_queue = tf.train.string_input_producer([filename])
+        reader = tf.TextLineReader()
+        key, value = reader.read(filename_queue) 
+        decoded = tf.decode_csv(value, record_defaults = record_defaults)
+        return tf.train.shuffle_batch(decoded,
+                                      batch_size=batch_size,
+                                      capacity=batch_size * 50,
+                                      min_after_dequeue=batch_size)
+
+    def features_labels(self, batch_size, filename, record_defaults):
+        sepal_length, sepal_width, petal_length, petal_width, flower = \
+            read_csv(batch_size, filename, record_defaults) 
+        features = tf.transpose(tf.pack([sepal_length, sepal_width, petal_length,petal_width]))
+        labels = tf.equal(flower, ["Iris-setosa"])
+        labels = tf.reshape(labels, [batch_size, 1])
+        return features, labels
+    
     def get_placeholder(self, size, dtype=tf.float32):
         """
         SHOULD NOT BE CHANGED IN THE INHERITED CLASS
